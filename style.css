@@ -8,3 +8,15 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.cell-row {
+    display: flex;
+}
+
+.cell {
+    width: 80px;
+    height: 40px;
+    border: 1px solid #D3D3D3;
+    outline: none;
+    box-sizing: border-box;
+}
