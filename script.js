@@ -40,9 +40,12 @@ function createCellEl(cell) {
 
 function drawSheet() {
     for(let i = 0; i < spreadsheet.length; i++){
-      for(let j = 0; j < spreadsheet[i].length; j++){
-        const cell = spreadsheet[i][j];
-        spreadSheetContainter.append(createCellEl(cell));
-      }  
+        const rowContainerEl = document.createElement("div");
+        rowContainerEl.className = "cell-row";
+        for(let j = 0; j < spreadsheet[i].length; j++){
+            const cell = spreadsheet[i][j];
+            rowContainerEl.append(createCellEl(cell));
+        }  
+        spreadSheetContainter.append(rowContainerEl);
     }
 }
