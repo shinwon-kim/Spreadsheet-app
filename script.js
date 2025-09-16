@@ -2,6 +2,10 @@ const spreadSheetContainter = document.querySelector("#spreadsheet-container");
 const ROWS = 10;
 const COLS = 10;
 const spreadsheet = [];
+const alphabets = [];
+for(let i = 65; i <= 90; i++){
+    alphabets.push(String.fromCharCode(i));
+}
 
 class Cell {
     constructor(isHeader, disabled, data, row, column, active=false) {
@@ -18,9 +22,29 @@ initSpreadsheet();
 function initSpreadsheet() {
     for(let i = 0; i < ROWS; i++){
         let spreadsheetRow = [];
-        for(let j = 0; j < COLS; j++){
 
-            const cell = new Cell(false, false, i + "-" + j, i, j, false)
+        
+        for(let j = 0; j < COLS; j++){
+            let cellData = "";
+            let isHeader = false;
+
+            // Numbering first Column
+            if(j === 0){
+                cellData = i;
+                isHeader = true;
+            }
+
+            if(i === 0){
+                cellData = alphabets[j - 1];
+                isHeader = true;
+            }
+
+            // first Row Column is blank
+            if(!cellData){
+                cellData = "";
+            }
+
+            const cell = new Cell(isHeader, false, cellData, i, j, false)
             spreadsheetRow.push(cell);
         }
         spreadsheet.push(spreadsheetRow);
