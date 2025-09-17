@@ -26,3 +26,8 @@
     background: #DCDCDC;
     font-weight: bold;
 }
+
+.cell.header.active {
+    background: #A8DFFF;
+    color: white;
+}
