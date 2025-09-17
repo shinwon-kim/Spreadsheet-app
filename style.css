@@ -20,3 +20,9 @@
     outline: none;
     box-sizing: border-box;
 }
+
+.cell.header {
+    text-align: center;
+    background: #DCDCDC;
+    font-weight: bold;
+}

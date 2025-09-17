@@ -22,21 +22,23 @@ initSpreadsheet();
 function initSpreadsheet() {
     for(let i = 0; i < ROWS; i++){
         let spreadsheetRow = [];
-
         
         for(let j = 0; j < COLS; j++){
             let cellData = "";
             let isHeader = false;
+            let disabled = false;
 
             // Numbering first Column
             if(j === 0){
                 cellData = i;
                 isHeader = true;
+                disabled = true;
             }
 
             if(i === 0){
                 cellData = alphabets[j - 1];
                 isHeader = true;
+                disabled = true;
             }
 
             // first Row Column is blank
@@ -44,7 +46,7 @@ function initSpreadsheet() {
                 cellData = "";
             }
 
-            const cell = new Cell(isHeader, false, cellData, i, j, false)
+            const cell = new Cell(isHeader, disabled, cellData, i, j, false)
             spreadsheetRow.push(cell);
         }
         spreadsheet.push(spreadsheetRow);
@@ -59,6 +61,11 @@ function createCellEl(cell) {
     cellEl.id = "cell_" + cell.row + cell.column;
     cellEl.value = cell.data;
     cellEl.disabled = cell.disabled;
+
+
+    if(cell.isHeader){
+        cellEl.classList.add("header");
+    }
     return cellEl;
 }
 
