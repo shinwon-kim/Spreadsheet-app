@@ -78,11 +78,11 @@ function createCellEl(cell) {
 function handleCellClick(cell) {
     const columnHeader = spreadsheet[0][cell.column];
     const rowHeader = spreadsheet[cell.row][0];
-    const columnHeaerEl = getElFromRowCol(columnHeader.row, columnHeader.column);
+    const columnHeaderEl = getElFromRowCol(columnHeader.row, columnHeader.column);
     const rowHeaderEl = getElFromRowCol(rowHeader.row, rowHeader.column);
-    columnHeaerEl.classList.add("active");
+    columnHeaderEl.classList.add("active");
     rowHeaderEl.classList.add("active");
-    console.log(columnHeaerEl, rowHeaderEl);
+    console.log(columnHeaderEl, rowHeaderEl);
 }
 
 function getElFromRowCol(row, col){
