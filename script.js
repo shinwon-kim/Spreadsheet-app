@@ -8,12 +8,14 @@ for(let i = 65; i <= 90; i++){
 }
 
 class Cell {
-    constructor(isHeader, disabled, data, row, column, active=false) {
+    constructor(isHeader, disabled, data, row, column, rowName, columnName, active=false) {
         this.isHeader = isHeader;
         this.disabled = disabled;
         this.data = data;
         this.row = row;
         this.column = column;
+        this.rowName = rowName;
+        this.columnName = columnName;
         this.active = active;
     }
 }
@@ -46,7 +48,10 @@ function initSpreadsheet() {
                 cellData = "";
             }
 
-            const cell = new Cell(isHeader, disabled, cellData, i, j, false)
+            const rowName = i;
+            const columnName = alphabets[j - 1];
+
+            const cell = new Cell(isHeader, disabled, cellData, i, j, rowName, columnName, false)
             spreadsheetRow.push(cell);
         }
         spreadsheet.push(spreadsheetRow);
@@ -62,11 +67,26 @@ function createCellEl(cell) {
     cellEl.value = cell.data;
     cellEl.disabled = cell.disabled;
 
-
     if(cell.isHeader){
         cellEl.classList.add("header");
     }
+
+    cellEl.onclick = () => handleCellClick(cell);
     return cellEl;
+}
+
+function handleCellClick(cell) {
+    const columnHeader = spreadsheet[0][cell.column];
+    const rowHeader = spreadsheet[cell.row][0];
+    const columnHeaerEl = getElFromRowCol(columnHeader.row, columnHeader.column);
+    const rowHeaderEl = getElFromRowCol(rowHeader.row, rowHeader.column);
+    columnHeaerEl.classList.add("active");
+    rowHeaderEl.classList.add("active");
+    console.log(columnHeaerEl, rowHeaderEl);
+}
+
+function getElFromRowCol(row, col){
+    return document.querySelector("#cell_" + row + col);
 }
 
 function drawSheet() {
