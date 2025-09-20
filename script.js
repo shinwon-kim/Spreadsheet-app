@@ -76,6 +76,7 @@ function createCellEl(cell) {
 }
 
 function handleCellClick(cell) {
+    clearHeaderActiveStates();
     const columnHeader = spreadsheet[0][cell.column];
     const rowHeader = spreadsheet[cell.row][0];
     const columnHeaderEl = getElFromRowCol(columnHeader.row, columnHeader.column);
@@ -83,6 +84,14 @@ function handleCellClick(cell) {
     columnHeaderEl.classList.add("active");
     rowHeaderEl.classList.add("active");
     console.log(columnHeaderEl, rowHeaderEl);
+}
+
+function clearHeaderActiveStates() {
+    const headers = document.querySelectorAll(".header");
+
+    headers.forEach((header) => {
+        header.classList.remove("active");
+    })
 }
 
 function getElFromRowCol(row, col){
