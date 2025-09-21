@@ -1,4 +1,5 @@
 const spreadSheetContainter = document.querySelector("#spreadsheet-container");
+const exportBtn = document.querySelector("#export-btn");
 const ROWS = 10;
 const COLS = 10;
 const spreadsheet = [];
@@ -18,6 +19,17 @@ class Cell {
         this.columnName = columnName;
         this.active = active;
     }
+}
+
+exportBtn.onclick = function (e) {
+    let csv = "";
+    for (let i = 0; i < spreadsheet.length; i++){
+        csv += spreadsheet[i]
+                .filter(item => !item.isHeader)
+                .map(item => item.data)
+                .join(",") + "\r\n";
+    }
+    console.log("Export Spreadsheet", csv);
 }
 
 initSpreadsheet();
@@ -72,7 +84,12 @@ function createCellEl(cell) {
     }
 
     cellEl.onclick = () => handleCellClick(cell);
+    cellEl.onchange = (e) => handleOnChange(e.target.value, cell);
     return cellEl;
+}
+
+function handleOnChange(data, cell) {
+    cell.data = data;
 }
 
 function handleCellClick(cell) {
@@ -83,7 +100,6 @@ function handleCellClick(cell) {
     const rowHeaderEl = getElFromRowCol(rowHeader.row, rowHeader.column);
     columnHeaderEl.classList.add("active");
     rowHeaderEl.classList.add("active");
-    console.log(columnHeaderEl, rowHeaderEl);
 }
 
 function clearHeaderActiveStates() {
