@@ -24,6 +24,7 @@ class Cell {
 exportBtn.onclick = function (e) {
     let csv = "";
     for (let i = 0; i < spreadsheet.length; i++){
+        if(i === 0) continue;
         csv += spreadsheet[i]
                 .filter(item => !item.isHeader)
                 .map(item => item.data)
