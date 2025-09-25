@@ -31,6 +31,14 @@ exportBtn.onclick = function (e) {
                 .join(",") + "\r\n";
     }
     console.log("Export Spreadsheet", csv);
+
+    const csvObj = new Blob([csv]);
+    const csvUrl = URL.createObjectURL(csvObj);
+
+    const a = document.createElement("a");
+    a.href = csvUrl;
+    a.download = "spreadsheet name.csv";
+    a.click();
 }
 
 initSpreadsheet();
