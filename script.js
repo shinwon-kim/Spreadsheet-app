@@ -92,13 +92,21 @@ function createCellEl(cell) {
         cellEl.classList.add("header");
     }
 
-    cellEl.onclick = () => handleCellClick(cell);
+    cellEl.addEventListener("click", () => {
+        handleCellClick(cell);
+        handleCellClicked(cellEl);
+    })
     cellEl.onchange = (e) => handleOnChange(e.target.value, cell);
     return cellEl;
 }
 
 function handleOnChange(data, cell) {
     cell.data = data;
+}
+
+function handleCellClicked(cellEl) {
+    clearHeaderClickedStates();
+    cellEl.classList.add("clicked");
 }
 
 function handleCellClick(cell) {
@@ -118,6 +126,13 @@ function clearHeaderActiveStates() {
 
     headers.forEach((header) => {
         header.classList.remove("active");
+    })
+}
+
+function clearHeaderClickedStates() {
+    const cells = document.querySelectorAll(".clicked");
+    cells.forEach((cell) => {
+        cell.classList.remove("clicked");
     })
 }
 

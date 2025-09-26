@@ -31,3 +31,8 @@
     background: #A8DFFF;
     color: white;
 }
+
+.cell.clicked {
+    background: #DCDCDC;
+    border: 3px solid #A8DFFF;
+}
